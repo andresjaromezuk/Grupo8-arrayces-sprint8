@@ -32,7 +32,7 @@ const userApiController = {
 
         try {
             let user = await User.findByPk(id)
-            s
+            
             delete user.password
             delete user.confirmPassword
             delete user.token
