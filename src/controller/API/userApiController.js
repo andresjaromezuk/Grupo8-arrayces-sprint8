@@ -14,6 +14,9 @@ const userApiController = {
             let data = []
             
             users.rows.forEach(user =>{
+                delete user.dataValues.password
+                delete user.dataValues.confirmPassword
+                delete user.dataValues.token
                  data.push({
                     user,
                     url: `${process.env.HOST}/api/users/${user.id}`
@@ -32,10 +35,11 @@ const userApiController = {
 
         try {
             let user = await User.findByPk(id)
-            
-            delete user.password
-            delete user.confirmPassword
-            delete user.token
+            console.log(user.dataValues)
+
+            delete user.dataValues.password
+            delete user.dataValues.confirmPassword
+            delete user.dataValues.token
 
             data = {
                 user,
