@@ -27,7 +27,7 @@ const productApiController = {
             products.rows.forEach(product =>{
                  data.push({
                     product,
-                    url: `http://localhost:3000/api/products/${product.id}`
+                    url: `${process.env.HOST}/api/products/${product.id}`
                 })
             })
             
@@ -55,7 +55,7 @@ const productApiController = {
             data = {
                 product,
                 //ARRAY NI IDEA
-                imgUrl : [`http://localhost:3000/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`]
+                imgUrl : [`${process.env.HOST}/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`]
             }
             res.status(200).json({data}) 
         } catch (error) {

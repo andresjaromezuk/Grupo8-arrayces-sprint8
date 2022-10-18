@@ -16,7 +16,7 @@ const userApiController = {
             users.rows.forEach(user =>{
                  data.push({
                     user,
-                    url: `http://localhost:3000/api/users/${user.id}`
+                    url: `${process.env.HOST}/api/users/${user.id}`
                 })
             })
 
@@ -32,15 +32,14 @@ const userApiController = {
 
         try {
             let user = await User.findByPk(id)
-            
-            //No borra nada!!!! Maldiiitoo!!
+            s
             delete user.password
             delete user.confirmPassword
             delete user.token
 
             data = {
                 user,
-                avatarUrl:`http://localhost:3000/images/users/${user.avatar}`
+                avatarUrl:`${process.env.HOST}/images/users/${user.avatar}`
             }
             res.status(200).json({data}) 
         } catch (error) {
