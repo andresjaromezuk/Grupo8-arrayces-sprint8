@@ -8,12 +8,12 @@ const userApiController = {
         let meta={status:'success', length:0 }
 
         try {
-            let users = await User.findAndCountAll({include})
-            meta.length = users.count
+            let users = await User.findAll({include})
+            meta.length = users.length
             
             let data = []
             
-            users.rows.forEach(user =>{
+            users.forEach(user =>{
                 delete user.dataValues.password
                 delete user.dataValues.confirmPassword
                 delete user.dataValues.token

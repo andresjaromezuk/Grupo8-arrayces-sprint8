@@ -131,6 +131,9 @@ const productController = {
                 },
                 include
             })
+
+            console.log(products)
+           
             res.render('./products/searchResult', {products})
         } catch (error) {
             res.json(error)
