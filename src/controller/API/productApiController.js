@@ -88,7 +88,8 @@ const productApiController = {
             console.log(imgs) */
             data = {
                 product,
-                imgUrl : [`${process.env.HOST}/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`]
+                imgUrl : [`${process.env.HOST}/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`],
+                url: `${process.env.HOST}/products/detail/${product.id}`
             }
             res.status(200).json({data}) 
         } catch (error) {
