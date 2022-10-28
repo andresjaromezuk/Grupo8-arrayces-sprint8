@@ -402,6 +402,8 @@ const productController = {
             res.json(error)
         }
     }
+
+    
 }
 
 module.exports = productController

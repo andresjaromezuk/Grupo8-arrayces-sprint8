@@ -68,12 +68,14 @@ const productApiController = {
 
     lastProduct: async (req, res) => {
 
-        const  include = ['Type', 'Size', 'Category', 'Images', 'Fee']
+        /* const  include = [{'Type'}, 'Size', 'Category', 'Images', 'Fee'] */
+        const include = [{model:Image, attributes:['name']}]
 
         try {
             let products = await Product.findAll({
-                order: [[ 'id', 'DESC' ]],
                 include,
+                attributes:['id', 'name', 'price', 'description' ],
+                order: [[ 'id', 'DESC' ]],
                 limit: 1
             })
 
@@ -86,8 +88,8 @@ const productApiController = {
             console.log(imgs) */
             data = {
                 product,
-                imgUrl : [`${process.env.HOST}/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`]
-            }
+/*                 imgUrl : [`${process.env.HOST}/images/${product.Images[0].name}`, `http://localhost:3000/images/${product.Images[1].name}`]
+ */            }
             res.status(200).json({data}) 
         } catch (error) {
             res.status(500).json({ error: error.message })
@@ -95,16 +97,17 @@ const productApiController = {
     },
 
     search: async (req, res) => {
+        
         try {  
             const  include = ['Type', 'Size', 'Category', 'Images', 'Fee']
 
             let meta={status:'success', length:0}
 
             let products = await Product.findAndCountAll({
+                include,
                 where: {
                     name: {[Op.like] : '%' + req.query.keyword + '%'}
                 },
-                include
             })
 
             console.log(products)

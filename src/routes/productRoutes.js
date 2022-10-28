@@ -40,4 +40,5 @@ router.put('/edit/:id', upload.array('image'), productEditValidation, productCon
 /* Ruta para eliminar producto */
 router.delete('/delete/:id', adminMiddleware, productController.destroy);
 
+
 module.exports = router; 
